@@ -24,10 +24,17 @@ export class TodosComponent implements OnInit {
     });
   }
 
-  onDelete(todo: Todo) {
-    // UI
+  deleteTodo(todo: Todo) {
+    // Remove From UI
     this.todos = this.todos.filter(t => t.id !== todo.id);
-    // Server
+    // Remove from server
     this.todoService.deleteTodo(todo).subscribe();
+  }
+
+  addTodo(todo: Todo) {
+    // tslint:disable-next-line: no-shadowed-variable
+    this.todoService.addTodo(todo).subscribe(todo => {
+      this.todos.push(todo);
+    });
   }
 }
